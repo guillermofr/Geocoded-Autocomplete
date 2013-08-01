@@ -12,8 +12,10 @@
         
         <script type="text/javascript">
         
+        var active_input;
+
         $(document).ready(function(){
-        
+            
             var options = {
                 map_frame_id: "mapframe",
                 map_window_id: "mapwindow",
@@ -24,8 +26,20 @@
                 lng: "-122.4194155",
                 map_zoom: 13 
             }
-			
-            $('#mapaddress').autogeocomplete(options);
+		
+            $('input.autocomplete').autogeocomplete(options);
+
+            $('input.autocomplete').click(function(e){
+                console.log(e);
+                $('#mapframe')
+                    .css('left',$(e.currentTarget).attr('offsetLeft'))
+                    .css('margin-left','250px')
+                    .css('top',$(e.currentTarget).attr('offsetTop'))
+                    .css('margin-top','20px');  
+                 active_input = $(e.currentTarget).attr('id');
+                
+            });
+
         });
 
         </script>
@@ -36,17 +50,38 @@
     <div id="mapblock">
         <h1>Geocoded Autocomplete</h1>
         
-        <label for="mapaddress">Address</label>
-        <input type=text id="mapaddress" />
+        <label for="from">From: </label>
+        <input type=text id="from" class="autocomplete" />
+
+        <label for="to">To: </label>
+        <input type=text id="to" class="autocomplete"  />
         <div id="mapframe"><div id="mapwindow"></div></div>
     </div>
-        <label for="filter_lat">Lat:</label>
-        <input type="text" id="filter_lat" />
+
+
+        <h4>from</h4>
+        <label for="filter_lat_from">Lat:</label>
+        <input type="text" id="filter_lat_from" />
         <br />
-        <label for="filter_lng">Lng:</label>
-        <input type="text" id="filter_lng" />
+        <label for="filter_lng_from">Lng:</label>
+        <input type="text" id="filter_lng_from" />
         <br />
-        <label for="filter_address">Address:</label>
-        <input type="text" id="filter_address" />
+        <label for="filter_address_from">Address:</label>
+        <input type="text" id="filter_address_from" />
+ 
+
+        <h4>to</h4>
+        </div>
+        <label for="filter_lat_to">Lat:</label>
+        <input type="text" id="filter_lat_to" />
+        <br />
+        <label for="filter_lng_to">Lng:</label>
+        <input type="text" id="filter_lng_to" />
+        <br />
+        <label for="filter_address_to">Address:</label>
+        <input type="text" id="filter_address_to" />
+
+    </body>
+       
     </body>
 </html>

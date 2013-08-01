@@ -9,10 +9,10 @@ body {font-size:80%;color:#505050;background:#fff;font-family:"Helvetica Neue", 
 #mapframe
 {
     background-color: #e7e7e7;
-    left: 280px;
+    left: 0px;
     padding: 5px;
     position: absolute;
-    top: 90px;
+    top: 0px;
     visibility: hidden;
 	width: 200px;
 	z-index: 99999999;
@@ -22,12 +22,17 @@ body {font-size:80%;color:#505050;background:#fff;font-family:"Helvetica Neue", 
 #mapframe #mapwindow
 {   
 	width: 200px;
-	height: 200px;
+	height: 247px;
+    z-index:10 !important;
 }
 
 .ui-autocomplete
 {
     border: #000000 solid 1px;
-    width: 450px;
+    width: 250px;
     height: 250px;
+    z-index:5 !important;
+    overflow-y:scroll;
 }
+
+

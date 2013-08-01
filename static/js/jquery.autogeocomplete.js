@@ -104,8 +104,17 @@
                 minLength: 4,
                 // set geocoder data when an address is selected
                 select: function(event, ui) {
-                    $("#" + lat_id).val(ui.item.latitude);
-                    $("#" + lng_id).val(ui.item.longitude);
+                    $("#" + lat_id + "_" + active_input).val(ui.item.latitude);
+                    $("#" + lng_id + "_" + active_input).val(ui.item.longitude);
+                    var reversegeocoder = new google.maps.Geocoder();
+                    temp_location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
+                    reversegeocoder.geocode({ 'latLng': temp_location }, function(results, status){
+                        $("#" + addr_id + "_" + active_input).val(results[0].formatted_address);
+                        
+                        if (typeof active_input != 'undefined')
+                        $('#'+active_input).val(results[0].formatted_address).trigger('keydown');
+
+                    });     
                 },
                 // set map to visible when autosuggester is activated
                 open: function(event, ui){
@@ -123,12 +132,12 @@
                 },
                 // update map rendering on mouseover / keyover
                 focus: function(event, ui){
-                    setMap(ui.item.latitude, ui.item.longitude);                
+                    setMap(ui.item.latitude, ui.item.longitude);       
                 }             
             })
             // format how each suggestions is presented
             .data( "autocomplete" )._renderItem = function( ul, item ) {
-			     return $( "<li></li>" )
+			     return $( "<li style='width:100% !important'></li>" )
 				    .data( "item.autocomplete", item )
     				.append( "<a><strong>" + item.label + "</strong><br>" + item.desc + "</a>" )
 	       			.appendTo( ul );
@@ -136,8 +145,8 @@
             
             // update geo coordinates and refresh map display
             function setMap(lat, lng){
-                $("#" + lat_id).val(lat);
-                $("#" + lng_id).val(lng);
+                $("#" + lat_id + "_" + active_input).val(lat);
+                $("#" + lng_id + "_" + active_input).val(lng);
                 map_location = new google.maps.LatLng(lat, lng);
                 marker.setPosition(map_location);
                 map.setCenter(map_location);     
@@ -158,31 +167,29 @@
             map = new google.maps.Map(document.getElementById(map_window_id), myOptions); 
             marker = new google.maps.Marker({
                 map: map,
-                draggable: false
+                draggable: true
             }); 
             
-            google.maps.event.addListener(map, 'click', function(event){
+
+
+            google.maps.event.addListener(marker, 'dragend', function(event){
             
                 // put the lat and lng values in the input boxes
-                $("#" + lat_id).val(event.latLng.b);
-                $("#" + lng_id).val(event.latLng.c);
-                
-                // set marker position to event click
-                var marker_position = event.latLng;
-                
-                // create new marker
-                var newMarker = new google.maps.Marker({
-                    map: map,
-                    draggable: false,
-                    position: marker_position
-                });
+                $("#" + lat_id + "_" + active_input).val(event.latLng.jb);
+                $("#" + lng_id + "_" + active_input).val(event.latLng.kb);
+
+                //console.log(event);
                 
                 // create a new geocode object to reverse geocode click position
                 var reversegeocoder = new google.maps.Geocoder();
                 
                 // geocoder returns an array or nearest matching address, take the first result and put it in the relevant drop down box 
                 reversegeocoder.geocode({ 'latLng': event.latLng }, function(results, status){
-                    $("#" + addr_id).val(results[0].formatted_address);
+                    $("#" + addr_id + "_" + active_input).val(results[0].formatted_address);
+                    
+                    if (typeof active_input != 'undefined')
+                    $('#'+active_input).val(results[0].formatted_address).trigger('keydown');
+
                 });        
             });
         }
