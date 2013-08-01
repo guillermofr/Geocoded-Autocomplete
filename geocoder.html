@@ -30,7 +30,6 @@
             $('input.autocomplete').autogeocomplete(options);
 
             $('input.autocomplete').click(function(e){
-                console.log(e);
                 $('#mapframe')
                     .css('left',$(e.currentTarget).attr('offsetLeft'))
                     .css('margin-left','250px')
