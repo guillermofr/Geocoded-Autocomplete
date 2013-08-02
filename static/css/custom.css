@@ -6,33 +6,40 @@ body {font-size:80%;color:#505050;background:#fff;font-family:"Helvetica Neue", 
     position: relative;
 }
 
-#mapframe
-{
-    background-color: #e7e7e7;
-    left: 0px;
-    padding: 5px;
-    position: absolute;
-    top: 0px;
-    visibility: hidden;
-	width: 200px;
-	z-index: 99999999;
-}
+
 
 
 #mapframe #mapwindow
 {   
-	width: 200px;
-	height: 247px;
+	width: 254px;
+	height: 150px;
     z-index:10 !important;
+}
+
+#mapframe
+{
+    background-color: #e7e7e7;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    visibility: hidden;
+    width: 254px;
+    border: 1px solid #ddd;
+    border-right-width: 1px;
+    border-top: 7px dashed red;
 }
 
 .ui-autocomplete
 {
     border: #000000 solid 1px;
     width: 250px;
-    height: 250px;
+    height: 200px;
     z-index:5 !important;
     overflow-y:scroll;
 }
 
-
+.ui-corner-all {
+    -moz-border-radius: 0px !important;
+    -webkit-border-radius: 0px !important;
+    border-radius: 0px !important;
+}

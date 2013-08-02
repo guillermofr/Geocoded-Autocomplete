@@ -27,14 +27,10 @@
                 map_zoom: 13 
             }
 		
-            $('input.autocomplete').autogeocomplete(options);
+            $('input.autocomplete').each(function(){$(this).autogeocomplete(options)});
 
-            $('input.autocomplete').click(function(e){
-                $('#mapframe')
-                    .css('left',$(e.currentTarget).attr('offsetLeft'))
-                    .css('margin-left','250px')
-                    .css('top',$(e.currentTarget).attr('offsetTop'))
-                    .css('margin-top','20px');  
+            $('input.autocomplete').focus(function(e){
+                
                  active_input = $(e.currentTarget).attr('id');
                 
             });

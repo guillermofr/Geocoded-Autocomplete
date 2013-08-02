@@ -125,6 +125,14 @@
                     
                     // hard coded css width in javascript to avoid editing jQuery css files
                     $('.ui-menu-item').css("width", "200px");
+
+                    //Show map 
+                    $('#mapframe')
+                    .css('left',$("#"+active_input).attr('offsetLeft'))
+                    .css('margin-left','0px')
+                    .css('top',$("#"+active_input).attr('offsetTop'))
+                    .css('margin-top','225px');  
+
                 },
                 // set map to invisible when autosuggester is deactivated
                 close: function(event, ui){
@@ -137,7 +145,7 @@
             })
             // format how each suggestions is presented
             .data( "autocomplete" )._renderItem = function( ul, item ) {
-			     return $( "<li style='width:100% !important'></li>" )
+                 return $( "<li style='width:100% !important'></li>" )
 				    .data( "item.autocomplete", item )
     				.append( "<a><strong>" + item.label + "</strong><br>" + item.desc + "</a>" )
 	       			.appendTo( ul );
