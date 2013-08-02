@@ -24,7 +24,6 @@
     var lng;
     var map_zoom;
 
-
     $.fn.extend({
         
         autogeocomplete: function(options){
@@ -178,8 +177,6 @@
                 draggable: true
             }); 
             
-
-
             google.maps.event.addListener(marker, 'dragend', function(event){
             
                 // put the lat and lng values in the input boxes

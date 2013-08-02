@@ -13,7 +13,6 @@
         <script type="text/javascript">
         
         var active_input;
-
         $(document).ready(function(){
             
             var options = {
@@ -27,12 +26,11 @@
                 map_zoom: 13 
             }
 		
-            $('input.autocomplete').each(function(){$(this).autogeocomplete(options)});
-
+            $('input.autocomplete').each(function(){
+                $(this).autogeocomplete(options)
+            });
             $('input.autocomplete').focus(function(e){
-                
                  active_input = $(e.currentTarget).attr('id');
-                
             });
 
         });
